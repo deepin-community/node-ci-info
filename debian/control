@@ -1,0 +1,33 @@
+Source: node-ci-info
+Section: javascript
+Priority: optional
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Siddhesh Rane <kingsid911@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+ , nodejs
+ , node-resolve-from
+ , node-tape <!nocheck>
+ , dh-sequence-nodejs
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/js-team/node-ci-info
+Vcs-Git: https://salsa.debian.org/js-team/node-ci-info.git
+Homepage: https://github.com/watson/ci-info
+Testsuite: autopkgtest-pkg-nodejs
+Rules-Requires-Root: no
+
+Package: node-ci-info
+Architecture: all
+Depends: ${misc:Depends}
+Provides: ${nodejs:Provides}
+Breaks: mocha (<< 9.1.0~)
+Multi-Arch: foreign
+Description: Get details about the current Continuous Integration environment
+ Lets you check whether you are running in a continuous integration server
+ and fetches the name of the CI service.
+ Supported CI:
+ Travis CI, CircleCI, Jenkins CI, Hudson,
+ Bamboo by Atlassian, TeamCity by JetBrains,
+ Team Foundation Server by Microsoft,
+ GitLab CI, Codeship, Drone, Magnum CI,
+ Semaphore, AppVeyor, Buildkite,
+ TaskCluster, GoCD, Bitbucket Pipelines

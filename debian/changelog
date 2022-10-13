@@ -1,0 +1,88 @@
+node-ci-info (3.2.0+~cs4.2.0-4) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Wed, 15 Sep 2021 11:35:46 +0100
+
+node-ci-info (3.2.0+~cs4.2.0-3) unstable; urgency=medium
+
+  * Team upload
+  * Back to unstable
+
+ -- Yadd <yadd@debian.org>  Fri, 27 Aug 2021 16:10:59 +0200
+
+node-ci-info (3.2.0+~cs4.2.0-2) experimental; urgency=medium
+
+  * Team upload
+  * Indicate that node-ci-info breaks mocha < 9.1.0~ (Closes: #992650)
+
+ -- Yadd <yadd@debian.org>  Thu, 26 Aug 2021 12:40:45 +0200
+
+node-ci-info (3.2.0+~cs4.2.0-1) experimental; urgency=medium
+
+  * Team upload
+  * Add is-unicode-supported as a component
+  * New upstream version 3.2.0+~cs4.2.0
+
+ -- Pirate Praveen <praveen@debian.org>  Sun, 15 Aug 2021 01:40:34 +0530
+
+node-ci-info (3.2.0+~cs4.1.0-1) experimental; urgency=medium
+
+  * Team upload
+  * Add is-interactive as a component
+  * Bump Standards-Version to 4.5.1 (no changes needed)
+  * New upstream version 3.2.0+~cs5.1.0
+  * Add clear-module as a test only module
+  * Lock is-interactive to 1.0
+  * New upstream version 3.2.0+~cs4.1.0
+
+ -- Pirate Praveen <praveen@debian.org>  Sun, 15 Aug 2021 00:51:24 +0530
+
+node-ci-info (2.0.0+~2.0.0-2) unstable; urgency=medium
+
+  * Team upload
+  * Fix autopkgtest
+  * Apply multi-arch hints
+
+ -- Xavier Guimard <yadd@debian.org>  Sat, 31 Oct 2020 07:23:03 +0100
+
+node-ci-info (2.0.0+~2.0.0-1) unstable; urgency=medium
+
+  * Team upload
+  * Embed typescript declaration
+  * Bump debhelper compatibility level to 13
+  * Use dh-sequence-nodejs
+  * Use pkg-js-tools auto test links
+
+ -- Xavier Guimard <yadd@debian.org>  Sun, 18 Oct 2020 22:28:36 +0200
+
+node-ci-info (2.0.0-1) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.0
+  * Bump debhelper compatibility level to 12
+  * Update VCS fields to salsa
+  * Use pkg-js-tools auto test & install
+  * Add "Rules-Requires-Root: no"
+  * Add debian/gbp.conf
+  * Add upstream/metadata
+  * Update copyright
+  * New upstream version 2.0.0
+  * Require nodejs ≥ 10
+  * Update test: use tape
+
+ -- Xavier Guimard <yadd@debian.org>  Wed, 11 Mar 2020 06:44:45 +0100
+
+node-ci-info (1.1.2-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+
+ -- Pirate Praveen <praveen@debian.org>  Sat, 03 Feb 2018 23:22:43 +0530
+
+node-ci-info (1.0.0-1) experimental; urgency=low
+
+  * Initial release (Closes: #850125)
+
+ -- Siddhesh Rane <kingsid911@gmail.com>  Wed, 04 Jan 2017 10:48:20 +0000
