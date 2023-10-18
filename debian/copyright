@@ -12,15 +12,11 @@ License: Expat
 
 Files: debian/*
 Copyright: 2017 Siddhesh Rane <kingsid911@gmail.com>
- 2020 Xavier Guimard <yadd@debian.org>
+ 2020 Yadd <yadd@debian.org>
 License: Expat
 
 Files: debian/tests/test_modules/* is-interactive/* is-unicode-supported/*
 Copyright: Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-License: Expat
-
-Files: types-ci-info/*
-Copyright: Microsoft Corporation
 License: Expat
 
 License: Expat
