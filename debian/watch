@@ -1,24 +1,19 @@
 version=4
 opts=\
 dversionmangle=s/\+(debian|dfsg|ds|deb)(\.\d+)?$//,\
-filenamemangle=s/.*\/v?([\d\.-]+)\.tar\.gz/node-ci-info-$1.tar.gz/ \
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-ci-info-$1/ \
  https://github.com/watson/ci-info/tags .*/archive.*/v?([\d\.]+).tar.gz group
-
-# It is not recommended use npmregistry. Please investigate more.
-# Take a look at https://wiki.debian.org/debian/watch/
-opts="searchmode=plain,component=types-ci-info,pgpmode=none" \
- https://registry.npmjs.org/@types/ci-info https://registry.npmjs.org/@types/ci-info/-/ci-info-([\d\.]+)@ARCHIVE_EXT@ checksum
 
 opts=\
 component=is-interactive,\
 ctype=nodejs,\
 dversionmangle=auto,\
-filenamemangle=s/.*\/v?([\d\.-]+)\.tar\.gz/node-is-interactive-$1.tar.gz/ \
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-is-interactive-$1/ \
  https://github.com/sindresorhus/is-interactive/tags .*/archive.*/v?(1[\d\.]+).tar.gz checksum
 
 opts=\
 component=is-unicode-supported,\
 ctype=nodejs,\
 dversionmangle=auto,\
-filenamemangle=s/.*\/v?([\d\.-]+)\.tar\.gz/node-is-unicode-supported-$1.tar.gz/ \
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-is-unicode-supported-$1/ \
  https://github.com/sindresorhus/is-unicode-supported/tags .*/archive.*/v?(0[\d\.]+).tar.gz checksum

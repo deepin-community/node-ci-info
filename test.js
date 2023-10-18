@@ -56,6 +56,26 @@ test('Unknown CI', function (t) {
   t.end()
 })
 
+test('Anonymous CI', function (t) {
+  const ANONYMOUS_ENV_VARS = [
+    'CI', 'CONTINUOUS_INTEGRATION', 'BUILD_ID',
+    'BUILD_NUMBER', 'CI_APP_ID', 'CI_BUILD_ID',
+    'CI_BUILD_NUMBER', 'RUN_ID', 'CI_NAME'
+  ]
+
+  for (const envVar in ANONYMOUS_ENV_VARS) {
+    process.env[envVar] = true
+
+    clearModule('./')
+    const ci = require('./')
+    t.equal(ci.isCI, true)
+    t.equal(ci.isPR, null)
+    t.equal(ci.name, null)
+  }
+
+  t.end()
+})
+
 test('AppVeyor - PR', function (t) {
   process.env.APPVEYOR = 'true'
   process.env.APPVEYOR_PULL_REQUEST_NUMBER = '42'
@@ -586,7 +606,7 @@ test('Netlify CI - Not PR', function (t) {
   t.end()
 })
 
-test('Vercel', function (t) {
+test('Vercel - NOW_BUILDER', function (t) {
   process.env.NOW_BUILDER = '1'
 
   clearModule('./')
@@ -599,6 +619,23 @@ test('Vercel', function (t) {
   assertVendorConstants('VERCEL', ci, t)
 
   delete process.env.NOW_BUILDER
+
+  t.end()
+})
+
+test('Vercel - VERCEL_URL', function (t) {
+  process.env.VERCEL_URL = '1'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.isPR, null)
+  t.equal(ci.name, 'Vercel')
+  t.equal(ci.VERCEL, true)
+  assertVendorConstants('VERCEL', ci, t)
+
+  delete process.env.VERCEL_URL
 
   t.end()
 })
@@ -637,6 +674,23 @@ test('Nevercode - Not PR', function (t) {
 
   delete process.env.NEVERCODE
   delete process.env.NEVERCODE_PULL_REQUEST
+
+  t.end()
+})
+
+test('Expo Application Services', function (t) {
+  process.env.EAS_BUILD = '1'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.isPR, null)
+  t.equal(ci.name, 'Expo Application Services')
+  t.equal(ci.EAS, true)
+  assertVendorConstants('EAS', ci, t)
+
+  delete process.env.EAS_BUILD
 
   t.end()
 })
@@ -729,8 +783,113 @@ test('Visual Studio App Center', function (t) {
   t.equal(ci.APPCENTER, true)
   assertVendorConstants('APPCENTER', ci, t)
 
-  delete process.env.APPCENTER
+  delete process.env.APPCENTER_BUILD_ID
 
+  t.end()
+})
+
+test('Codemagic - PR', function (t) {
+  process.env.CM_BUILD_ID = '1'
+  process.env.CM_PULL_REQUEST = '1'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.isPR, true)
+  t.equal(ci.name, 'Codemagic')
+  t.equal(ci.CODEMAGIC, true)
+  assertVendorConstants('CODEMAGIC', ci, t)
+
+  delete process.env.CM_BUILD_ID
+  delete process.env.CM_PULL_REQUEST
+
+  t.end()
+})
+
+test('Codemagic - Not PR', function (t) {
+  process.env.CM_BUILD_ID = '1'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.isPR, false)
+  t.equal(ci.name, 'Codemagic')
+  t.equal(ci.CODEMAGIC, true)
+  assertVendorConstants('CODEMAGIC', ci, t)
+
+  delete process.env.CM_BUILD_ID
+
+  t.end()
+})
+
+test('Xcode Cloud - PR', function (t) {
+  process.env.CI_XCODE_PROJECT = 'xx'
+  process.env.CI_PULL_REQUEST_NUMBER = '1'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.isPR, true)
+  t.equal(ci.name, 'Xcode Cloud')
+  t.equal(ci.XCODE_CLOUD, true)
+  assertVendorConstants('XCODE_CLOUD', ci, t)
+
+  delete process.env.CI_XCODE_PROJECT
+  delete process.env.CI_PULL_REQUEST_NUMBER
+
+  t.end()
+})
+
+test('Xcode Cloud - Not PR', function (t) {
+  process.env.CI_XCODE_PROJECT = 'xx'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.isPR, false)
+  t.equal(ci.name, 'Xcode Cloud')
+  t.equal(ci.XCODE_CLOUD, true)
+  assertVendorConstants('XCODE_CLOUD', ci, t)
+
+  delete process.env.CI_XCODE_PROJECT
+
+  t.end()
+})
+
+test('Xcode Server - Not PR', function (t) {
+  process.env.XCS = 'true'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  // t.equal(ci.isPR, false)
+  t.equal(ci.name, 'Xcode Server')
+  t.equal(ci.XCODE_SERVER, true)
+  assertVendorConstants('XCODE_SERVER', ci, t)
+
+  delete process.env.XCS
+
+  t.end()
+})
+
+test('Heroku', function (t) {
+  const realNode = process.env.NODE
+  process.env.NODE = '/extra/content/app/.heroku/node/bin/node --extra --content'
+
+  clearModule('./')
+  const ci = require('./')
+
+  t.equal(ci.isCI, true)
+  t.equal(ci.name, 'Heroku')
+  t.equal(ci.HEROKU, true)
+  assertVendorConstants('HEROKU', ci, t)
+
+  process.env.NODE = realNode
   t.end()
 })
 
